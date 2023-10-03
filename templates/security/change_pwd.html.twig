@@ -1,0 +1,95 @@
+{% extends "../base.html.twig" %}
+
+{% block title %}Modifier profile{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="row mt-6">
+        <div class="col-lg-9 col-12 mx-auto position-relative">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div class="icon icon-lg icon-shape bg-gradient-dark shadow text-center border-radius-xl mt-n4 me-3 float-start">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <h6 class="mb-0">Changer le mot de passe de l'utilisateur <span class="text-info font-italic">{{ user.username }}</span></h6>
+                </div>
+                <div class="card-body pt-2">
+                    {% for message in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+                            <span class="alert-icon align-middle">
+                              <span class="material-icons text-md">thumb_up_off_alt</span>
+                            </span>
+                            <span class="alert-text"><strong> {{ message }} </strong></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    {% for message in app.session.flashBag.get('danger') %}
+                        <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+                            <span class="alert-icon align-middle">
+                              <span class="material-symbols-outlined">thumb_down</span>
+                            </span>
+                            <span class="alert-text"><strong> {{ message }} </strong>!!!</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="row mt-4">
+                        <div class="input-group input-group-dynamic">
+                            <label for="fullname" class="form-label">{{ form_label(form.fullname) }}</label>
+                            {{ form_widget(form.fullname, {'attr': {'class': 'form-control ps-1', 'id': 'fullname'}}) }}
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="input-group input-group-dynamic">
+                            <label for="username" class="form-label">{{ form_label(form.username) }}</label>
+                            {{ form_widget(form.username, {'attr': {'class': 'form-control ps-1', 'id': 'username'}}) }}
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        {{ form_errors(form.old_password, {'attr': {'class': 'form-error'}}) }}
+                        {{ form_errors(form.password.first, {'attr': {'class': 'form-error'}}) }}
+                        {{ form_errors(form.password.second, {'attr': {'class': 'form-error'}}) }}
+                    </div>
+                    <div class="row mt-4">
+                        <div class="input-group input-group-dynamic">
+                            <label for="oldpassword" class="form-label">{{ form_label(form.old_password) }}</label>
+                            {{ form_widget(form.old_password, {'attr': {'class': 'form-control ps-1', 'id': 'oldpassword'}}) }}
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="input-group input-group-static">
+                            <label for="firstpassword" class="form-label">{{ form_label(form.password.first) }}</label>
+                            {{ form_widget(form.password.first, {'attr': {'class': 'form-control', 'id': 'firstpassword'}}) }}
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="input-group input-group-static">
+                            <label for="secondpassword" class="form-label">{{ form_label(form.password.second) }}</label>
+                            {{ form_widget(form.password.second, {'attr': {'class': 'form-control', 'id': 'secondpassword'}}) }}
+                        </div>
+                    </div>
+                    {#
+                    <div class="row">
+                        <div class="input-group input-group-dynamic mt-4">
+                            <label class="form-label">Starting Files</label>
+                            <div action="/file-upload" class="form-control dropzone" id="dropzone">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    #}
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="submit" name="button" class="btn btn-sm bg-gradient-info me-2">Enregistrer</button>
+                        <a class="btn btn-sm bg-gradient-primary" href="{{ path('home') }}">Annuler</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

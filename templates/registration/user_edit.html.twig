@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier profile{% endblock %}
+
+{% block body %}
+
+    <div class="container my-7">
+        <div class="h5 text-success">Modifier le compte de l'utilisateur {{ user.username }}</div>
+        <hr>
+        {{ form_start(form) }}
+        <div class="row mt-4 mb-1">
+            <div class="row mb-4">
+                <div class="col-4">
+                    <small class="text-danger list-unstyled">{{ form_errors(form.fullname, {'attr': {'class': 'form-error'}}) }}</small>
+                    <div class="input-group input-group-static is-valid mb-4">
+                        <label class="form-label">{{ form_label(form.fullname) }}</label>
+                        {{ form_widget(form.fullname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-4">
+                    <small class="text-danger list-unstyled">{{ form_errors(form.username, {'attr': {'class': 'form-error'}}) }}</small>
+                    <div class="input-group input-group-static is-valid mb-4">
+                        <label class="form-label">{{ form_label(form.username) }}</label>
+                        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-4">
+                    <small class="text-danger list-unstyled">{{ form_errors(form.telephone, {'attr': {'class': 'form-error'}}) }}</small>
+                    <div class="input-group input-group-static is-valid mb-4">
+                        <label class="form-label">{{ form_label(form.telephone) }}</label>
+                        {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" hidden>
+            <div class="col-md-6">{{ form_row(form.password) }}</div>
+            <div class="col-md">{{ form_row(form.roles) }}</div>
+            <div class="col-md">{{ form_row(form.service) }}</div>
+            <div class="col-md">{{ form_row(form.agreeTerms) }}</div>
+        </div>
+        <button type="submit" class="btn btn-success btn-sm">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            <span class="fw-bolder">Enregistrer les modifications</span>
+        </button>
+        <a class="btn btn-dark btn-sm" href="#">
+            <i class="fa fa-window-restore" aria-hidden="true"></i>
+            <span class="fw-bolder">Annuler les modifications</span>
+        </a>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

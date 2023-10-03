@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "partials/_head.html.twig" %}
+
+<body class="">
+<div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+        <div class="col-12">
+            {% include "partials/_navregister.html.twig" %}
+        </div>
+    </div>
+</div>
+<main class="main-content  mt-0">
+    <section>
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+                        <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('{{ asset('asset/img/minfi_1.jpg') }}'); background-size: cover;">
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+                        <div class="card card-plain">
+                            <div class="card-header">
+                                <h4 class="font-weight-bolder"><span class="btn bg-gradient-primary">CODEMI</span> S'enregistrer</h4>
+                                <p class="mb-0">Remplissez le formulaire ci-dessous</p>
+                            </div>
+                            <div class="card-body">
+                                {{ form_errors(registrationForm) }}
+
+                                {{ form_start(registrationForm) }}
+                                    <small class="text-danger list-unstyled">{{ form_errors(registrationForm.fullname, {'attr': {'class': 'form-error'}}) }}</small>
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="form-label">{{ form_label(registrationForm.fullname) }}</label>
+                                        {{ form_widget(registrationForm.fullname, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <small class="text-danger list-unstyled">{{ form_errors(registrationForm.username, {'attr': {'class': 'form-error'}}) }}</small>
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="form-label">{{ form_label(registrationForm.username) }}</label>
+                                        {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <small class="text-danger list-unstyled">{{ form_errors(registrationForm.telephone, {'attr': {'class': 'form-error'}}) }}</small>
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="form-label">{{ form_label(registrationForm.telephone) }}</label>
+                                        {{ form_widget(registrationForm.telephone, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <small class="text-danger list-unstyled">
+                                        {{ form_errors(registrationForm.password.first, {'attr': {'class': 'form-error'}}) }}
+                                    </small>
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="form-label">{{ form_label(registrationForm.password.first) }}</label>
+                                        {{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <small class="text-danger">
+                                        {{ form_errors(registrationForm.password.second, {'attr': {'class': 'form-error'}}) }}
+                                    </small>
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="form-label">{{ form_label(registrationForm.password.second) }}</label>
+                                        {{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <small class="text-danger">
+                                        {{ form_errors(registrationForm.service, {'attr': {'class': 'form-error'}}) }}
+                                    </small>
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="form-label">{{ form_label(registrationForm.service) }}</label>
+                                        {{ form_widget(registrationForm.service, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <small class="text-danger">
+                                        {{ form_errors(registrationForm.roles, {'attr': {'class': 'form-error'}}) }}
+                                    </small>
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="form-label">{{ form_label(registrationForm.roles) }}</label>
+                                        {{ form_widget(registrationForm.roles, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+
+                                    <div class="form-check form-check-info text-start ps-0">
+                                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input', 'type': 'checkbox', 'id':'flexCheckDefault'}}) }}
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                                        </label>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Créer le compte</button>
+                                    </div>
+                                {{ form_end(registrationForm) }}
+                            </div>
+                            <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                <p class="mb-2 text-sm mx-auto">
+                                    Avez-vous déjà un compte ?
+                                    <a href="../../../pages/authentication/signin/basic.html" class="text-primary text-gradient font-weight-bold">Connectez-vous</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% include "partials/_corejs.html.twig" %}
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
+    <div class="container-fluid ps-2 pe-0">
+        <a class="btn btn-sm  bg-gradient-primary  mb-0" onclick="smoothToPricing('pricing-soft-ui')" href="{{ path('home') }}">
+            CODEMI
+        </a>
+        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon mt-2">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>
+        </button>
+        <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+            <ul class="navbar-nav navbar-nav-hover mx-auto">
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                    <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false">
+                        Compte d'utilisateur
+                        <img src="{{ asset('asset/img/down-arrow-dark.svg') }}" alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
+                        <img src="{{ asset('asset/img/down-arrow-dark.svg') }}" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownMenuBlocks">
+                        <div class="d-none d-lg-block">
+                            <ul class="list-group">
+                                <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+                                    <a class="dropdown-item border-radius-md mb-2" href="#">
+                                        <div class="d-flex align-items-center text-dark">
+                                            <i class="material-icons opacity-6 me-2 text-md">people</i>
+                                            Modifier vos informations
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+                                    <a class="dropdown-item border-radius-md mb-2" href="#">
+                                        <div class="d-flex align-items-center text-dark">
+                                            <i class="material-icons opacity-6 me-2 text-md">badge</i>
+                                            Changer votre mot de passe
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- responsive -->
+                        <div class="row d-lg-none">
+                            <div class="col-md-12">
+                                <a class="py-2 ps-3 border-radius-md" href="#">
+                                    <div class="d-flex align-items-center text-dark">
+                                        <i class="material-icons opacity-6 me-2 text-md">widgets</i>
+                                        Kanban
+                                    </div>
+                                </a>
+                                <a class="py-2 ps-3 border-radius-md" href="#">
+                                    <div class="d-flex align-items-center text-dark">
+                                        <i class="material-icons opacity-6 me-2 text-md">import_contacts</i>
+                                        Wizard
+                                    </div>
+                                </a>
+                                <a class="py-2 ps-3 border-radius-md" href="#">
+                                    <div class="d-flex align-items-center text-dark">
+                                        <i class="material-icons opacity-6 me-2 text-md">backup_table</i>
+                                        DataTables
+                                    </div>
+                                </a>
+                                <a class="py-2 ps-3 border-radius-md" href="#">
+                                    <div class="d-flex align-items-center text-dark">
+                                        <i class="material-icons opacity-6 me-2 text-md">event</i>
+                                        Calendar
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                    <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
+                        Authentification
+                        <img src="{{ asset('asset/img/down-arrow-dark.svg') }}" alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
+                        <img src="{{ asset('asset/img/down-arrow-dark.svg') }}" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-animation dropdown-lg mt-0 mt-lg-3 p-3 border-radius-lg" aria-labelledby="dropdownMenuDocs">
+                        <div class="d-none d-lg-block">
+                            <ul class="list-group">
+                                <li class="nav-item list-group-item border-0 p-0">
+                                    <a class="dropdown-item border-radius-md text-dark" href="{{ path('app_login') }}">
+                                        <div class="d-flex align-items-center">
+                                            <i class="material-icons opacity-6 me-2 text-md">article</i>
+                                            <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0 mb-0">Se connecter</h6>
+                                        </div>
+                                        <span class="text-sm opacity-8 ps-4">Pour pouvoir commencer à utiliser l'application</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item list-group-item border-0 p-0">
+                                    <a class="dropdown-item border-radius-md text-dark" href="{{ path('app_register') }}">
+                                        <div class="d-flex align-items-center">
+                                            <i class="material-icons opacity-6 me-2 text-md">grading</i>
+                                            <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0 mb-0">Créer un compte</h6>
+                                        </div>
+                                        <span class="text-sm opacity-8 ps-4">Pour enregistrer un nouvel utilisateur</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item list-group-item border-0 p-0">
+                                    <a class="dropdown-item border-radius-md text-dark" href="https://www.creative-tim.com/learning-lab/bootstrap/alerts/material-dashboard">
+                                        <div class="d-flex align-items-center">
+                                            <i class="material-icons opacity-6 me-2 text-md">apps</i>
+                                            <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0 mb-0">Se déconnecter</h6>
+                                        </div>
+                                        <span class="text-sm opacity-8 ps-4">Pour quitter l'application, assurez-vous d'être déconnecté(e)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row d-lg-none">
+                            <div class="col-md-12 g-0">
+                                <a class="dropdown-item border-radius-md text-dark" href="../../../pages/about-us.html">
+                                    <div class="d-flex align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">article</i>
+                                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0">Getting Started</h6>
+                                    </div>
+                                    <span class="text-sm ps-4">All about overview, quick start, license and contents</span>
+                                </a>
+                                <a class="dropdown-item border-radius-md text-dark" href="../../../pages/about-us.html">
+                                    <div class="d-flex align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">grading</i>
+                                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0">Foundation</h6>
+                                    </div>
+                                    <span class="text-sm ps-4">See our colors, icons and typography</span>
+                                </a>
+                                <a class="dropdown-item border-radius-md text-dark" href="../../../pages/about-us.html">
+                                    <div class="d-flex align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">apps</i>
+                                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0">Components</h6>
+                                    </div>
+                                    <span class="text-sm ps-4">Explore our collection of fully designed components</span>
+                                </a>
+                                <a class="dropdown-item border-radius-md text-dark" href="../../../pages/about-us.html">
+                                    <div class="d-flex align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">extension</i>
+                                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0">Plugins</h6>
+                                        <span class="text-sm ps-4">Check how you can integrate our plugins</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item border-radius-md text-dark" href="../../../pages/about-us.html">
+                                    <div class="d-flex align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">swipe</i>
+                                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center p-0">Utility Classes</h6>
+                                        <span class="text-sm ps-4">All about overview, quick start, license and contents</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav d-lg-block d-none">
+                <li class="nav-item">
+                    <a href="{{ path('app_login') }}" class="btn btn-sm  bg-gradient-primary  mb-0" onclick="smoothToPricing('pricing-soft-ui')">Se connecter</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->

@@ -1,18 +1,129 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('asset/img/apple-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('asset/img/favicon.png') }}">
+    {% block stylesheets %}{% endblock %}
+    <title>CODEMI - {% block title %}{% endblock %}</title>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/css.css') }}" />
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/all.min.css') }}" />
+
+    <!-- Nucleo Icons -->
+    <link href="{{ asset('asset/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('asset/css/nucleo-svg.css') }}" rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <script src="{{ asset('asset/js/42d5adcbca.js') }}" crossorigin="anonymous"></script>
+
+    <!-- Material Icons -->
+    <link href="{{ asset('asset/css/icon.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/css/css2.css') }}" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{{ asset('asset/css/material-dashboard.css') }}" rel="stylesheet" />
+
+    <!-- Nepcha Analytics (nepcha.com) -->
+    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+    <script defer data-site="YOUR_DOMAIN_HERE" src="{{ asset('asset/js/nepcha-analytics.js') }}"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+{# Inclusion de la partie aside #}
+{% include "partials/_aside.html.twig" %}
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    {# Inclusion du navbar #}
+    {% include "partials/_hearder.html.twig" %}
+    <div class="container-fluid py-4">
+        {# Partie des stats #}
+        {% include "partials/_dashboard.html.twig" %}
         {% block body %}{% endblock %}
-    </body>
-</html>
+        {% include "partials/_footer.html.twig" %}
+    </div>
+</main>
+
+{% include "partials/_settings.html.twig" %}
+
+<!--   Core JS Files   -->
+<script src="{{ asset('asset/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('asset/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/choices.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/quill.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/flatpickr.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/dropzone.min.js') }}"></script>
+<script>
+    if (document.getElementById('editor')) {
+        var quill = new Quill('#editor', {
+            theme: 'snow' // Specify theme in configuration
+        });
+    }
+
+    if (document.getElementById('choices-multiple-remove-button')) {
+        var element = document.getElementById('choices-multiple-remove-button');
+        const example = new Choices(element, {
+            removeItemButton: true
+        });
+
+        example.setChoices(
+            [{
+                value: 'One',
+                label: 'Label One',
+                disabled: true
+            },
+                {
+                    value: 'Two',
+                    label: 'Label Two',
+                    selected: true
+                },
+                {
+                    value: 'Three',
+                    label: 'Label Three'
+                },
+            ],
+            'value',
+            'label',
+            false,
+        );
+    }
+
+    if (document.querySelector('.datetimepicker')) {
+        flatpickr('.datetimepicker', {
+            allowInput: true
+        }); // flatpickr
+    }
+
+    Dropzone.autoDiscover = false;
+    var drop = document.getElementById('dropzone')
+    var myDropzone = new Dropzone(drop, {
+        url: "/file/post",
+        addRemoveLinks: true
+
+    });
+</script>
+<!-- Kanban scripts -->
+<script src="{{ asset('asset/js/plugins/dragula/dragula.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/jkanban/jkanban.js') }}"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+<!-- Github buttons -->
+<script async defer src="{{ asset('asset/js/buttons.js') }}"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{{ asset('asset/js/material-dashboard.min.js') }}"></script>
+{% block js %}{% endblock %}
+</body>
