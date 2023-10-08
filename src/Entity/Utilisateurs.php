@@ -57,6 +57,9 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $enable_y_n = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isPasswordModified = null;
+
     public function __construct()
     {
         $this->usersCrees = new ArrayCollection();
@@ -270,6 +273,18 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEnableYN(bool $enable_y_n): static
     {
         $this->enable_y_n = $enable_y_n;
+
+        return $this;
+    }
+
+    public function isIsPasswordModified(): ?bool
+    {
+        return $this->isPasswordModified;
+    }
+
+    public function setIsPasswordModified(?bool $isPasswordModified): static
+    {
+        $this->isPasswordModified = $isPasswordModified;
 
         return $this;
     }

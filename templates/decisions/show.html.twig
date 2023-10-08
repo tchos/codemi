@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decisions{% endblock %}
+
+{% block body %}
+    <h1>Decisions</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ decision.id }}</td>
+            </tr>
+            <tr>
+                <th>NumeroDecision</th>
+                <td>{{ decision.numeroDecision }}</td>
+            </tr>
+            <tr>
+                <th>DateSignature</th>
+                <td>{{ decision.dateSignature ? decision.dateSignature|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Signataire</th>
+                <td>{{ decision.signataire }}</td>
+            </tr>
+            <tr>
+                <th>Ministere</th>
+                <td>{{ decision.ministere }}</td>
+            </tr>
+            <tr>
+                <th>NbrePages</th>
+                <td>{{ decision.nbrePages }}</td>
+            </tr>
+            <tr>
+                <th>NbreAgentsInvalidesDecision</th>
+                <td>{{ decision.nbreAgentsInvalidesDecision }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_decisions_index') }}">back to list</a>
+
+    <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}">edit</a>
+
+    {{ include('decisions/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Decisions{% endblock %}
+
+{% block body %}
+    <h1>Create new Decisions</h1>
+
+    {{ include('decisions/_form.html.twig') }}
+
+    <a href="{{ path('app_decisions_index') }}">back to list</a>
+{% endblock %}
