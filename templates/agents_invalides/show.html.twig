@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AgentsInvalides{% endblock %}
+
+{% block body %}
+    <h1>AgentsInvalides</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ agents_invalide.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ agents_invalide.nom }}</td>
+            </tr>
+            <tr>
+                <th>MatriculeArmee</th>
+                <td>{{ agents_invalide.matriculeArmee }}</td>
+            </tr>
+            <tr>
+                <th>MatriculeSolde</th>
+                <td>{{ agents_invalide.matriculeSolde }}</td>
+            </tr>
+            <tr>
+                <th>Grade</th>
+                <td>{{ agents_invalide.grade }}</td>
+            </tr>
+            <tr>
+                <th>TauxInvalidite</th>
+                <td>{{ agents_invalide.tauxInvalidite }}</td>
+            </tr>
+            <tr>
+                <th>DateInvalidite</th>
+                <td>{{ agents_invalide.dateInvalidite ? agents_invalide.dateInvalidite|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>RangInstance</th>
+                <td>{{ agents_invalide.rangInstance }}</td>
+            </tr>
+            <tr>
+                <th>Revalorisation_y_n</th>
+                <td>{{ agents_invalide.revalorisationYN ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TypeAgent</th>
+                <td>{{ agents_invalide.typeAgent }}</td>
+            </tr>
+            <tr>
+                <th>AuteurInvalide</th>
+                <td>{{ agents_invalide.auteurInvalide }}</td>
+            </tr>
+            <tr>
+                <th>DateDecesAuteur</th>
+                <td>{{ agents_invalide.dateDecesAuteur ? agents_invalide.dateDecesAuteur|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TypeInvalidite</th>
+                <td>{{ agents_invalide.typeInvalidite }}</td>
+            </tr>
+            <tr>
+                <th>RangDecision</th>
+                <td>{{ agents_invalide.rangDecision }}</td>
+            </tr>
+            <tr>
+                <th>RangPage</th>
+                <td>{{ agents_invalide.rangPage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_agents_invalides_index') }}">back to list</a>
+
+    <a href="{{ path('app_agents_invalides_edit', {'id': agents_invalide.id}) }}">edit</a>
+
+    {{ include('agents_invalides/_delete_form.html.twig') }}
+{% endblock %}

@@ -3,43 +3,97 @@
 {% block title %}Decisions index{% endblock %}
 
 {% block body %}
-    <h1>Decisions index</h1>
+    <div class="container-fluid py-4">
+        <a class="btn btn-sm btn-success mt-4" href="{{ path('app_decisions_new') }}">Enregistrer une nouvelle décision</a>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header">
+                        <h5 class="mb-0">Liste des décisions</h5>
+                        <p class="text-sm mb-0">
+                            Liste des décisions ministérielles d'invalidité signées.
+                        </p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-flush" id="datatable-search">
+                            <thead class="thead-light bg-gradient-dark">
+                            <tr>
+                                <th class="text-white">N°</th>
+                                <th class="text-white">Numéro</th>
+                                <th class="text-white">Date signature</th>
+                                <th class="text-white">Copie numérique</th>
+                                <th class="text-white">Ministère</th>
+                                <th class="text-white">Nbre de page</th>
+                                <th class="text-white">Nbre agents</th>
+                                <th class="text-white text-center">actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% set i = 1 %}
+                            {% for decision in decisions %}
+                                {% set ministere = decision.ministere %}
+                                {% set year = decision.dateSignature | date('Y') %}
+                                <tr>
+                                    <td class="text-sm font-weight-normal">{{ i }}</td>
+                                    <td class="text-sm font-weight-normal text-start">{{ decision.numeroDecision }}</td>
+                                    <td class="text-sm font-weight-normal ps-5">{{ decision.dateSignature ? decision.dateSignature|date('Y-m-d') : '' }}</td>
+                                    <td class="text-sm font-weight-normal ps-6">
+                                        <a title="copie numérique de la decision {{ decision.numeroDecision }}"
+                                           href="{% if decision.copie != "" %}
+                                                {{ asset("asset/copies/" ~ ministere ~ "/" ~ year ~ "/" ~ decision.copie ) }}
+                                                {% else %}
+                                                    {{ path('app_decisions_show', {'id': decision.id}) }}
+                                            {% endif %}">
+                                            <img src="{{ asset("asset/img/logos/pdf_file_icon.png") }}" alt="{{ decision.copie }}" width="17px">
+                                        </a>
+                                    </td>
+                                    <td class="text-sm font-weight-normal">{{ ministere }}</td>
+                                    <td class="text-sm font-weight-normal ps-5">{{ decision.nbrePages }}</td>
+                                    <td class="text-sm font-weight-normal ps-5">{{ decision.nbreAgentsInvalidesDecision }}</td>
+                                    <td class="text-sm font-weight-normal text-center">
+                                        <a href="{{ path('app_decisions_show', {'id': decision.id}) }}" class="me-2 text-info">
+                                            <span class="material-symbols-outlined">preview</span>
+                                        </a>
+                                        <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="me-2 text-warning">
+                                            <span class="material-symbols-outlined">draw</span>
+                                        </a>
+                                        <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="me-2 text-danger">
+                                            <span class="material-symbols-outlined">delete_forever</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% set i = i + 1 %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="8">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NumeroDecision</th>
-                <th>DateSignature</th>
-                <th>Signataire</th>
-                <th>Ministere</th>
-                <th>NbrePages</th>
-                <th>NbreAgentsInvalidesDecision</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for decision in decisions %}
-            <tr>
-                <td>{{ decision.id }}</td>
-                <td>{{ decision.numeroDecision }}</td>
-                <td>{{ decision.dateSignature ? decision.dateSignature|date('Y-m-d') : '' }}</td>
-                <td>{{ decision.signataire }}</td>
-                <td>{{ decision.ministere }}</td>
-                <td>{{ decision.nbrePages }}</td>
-                <td>{{ decision.nbreAgentsInvalidesDecision }}</td>
-                <td>
-                    <a href="{{ path('app_decisions_show', {'id': decision.id}) }}">show</a>
-                    <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_decisions_new') }}">Create new</a>
+{% block js %}
+    <!--   Core JS Files   -->
+    <script src="{{ asset('asset/js/plugins/datatables.js') }}"></script>
+    <script>
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: true
+        });
+    </script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
 {% endblock %}

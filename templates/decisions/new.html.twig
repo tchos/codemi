@@ -3,9 +3,99 @@
 {% block title %}New Decisions{% endblock %}
 
 {% block body %}
-    <h1>Create new Decisions</h1>
+    {{ form_start(form) }}
+    <div class="row mt-6">
+        <div class="col-lg-9 col-12 mx-auto position-relative">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div class="icon icon-lg icon-shape bg-gradient-dark shadow text-center border-radius-xl mt-n4 me-3 float-start">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <h6 class="mb-0">Enregistrer une nouvelle décision ministérielle</h6>
+                </div>
+                <div class="card-body pt-2">
+                    {% for message in app.session.flashBag.get('danger') %}
+                        <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+                            <span class="alert-icon align-middle">
+                              <span class="material-symbols-outlined">thumb_down</span>
+                            </span>
+                            <span class="alert-text"><strong> {{ message }} </strong>!!!</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="row mt-4">
+                        {#
+                        {{ form_errors(form.old_password, {'attr': {'class': 'form-error'}}) }}
+                        {{ form_errors(form.password.first, {'attr': {'class': 'form-error'}}) }}
+                        {{ form_errors(form.password.second, {'attr': {'class': 'form-error'}}) }}  #}
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="input-group input-group-static">
+                                {{ form_label(form.numeroDecision) }}
+                                {{ form_widget(form.numeroDecision) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-static">
+                                {{ form_label(form.dateSignature) }}
+                                {{ form_widget(form.dateSignature) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-static">
+                                <div class="input-group input-group-static">
+                                    {{ form_label(form.signataire) }}
+                                    {{ form_widget(form.signataire) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    {{ include('decisions/_form.html.twig') }}
-
-    <a href="{{ path('app_decisions_index') }}">back to list</a>
+                    <div class="row mt-5">
+                        <div class="col">
+                            <div class="input-group input-group-static">
+                                {{ form_label(form.ministere) }}
+                                {{ form_widget(form.ministere) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-static">
+                                {{ form_label(form.nbrePages) }}
+                                {{ form_widget(form.nbrePages) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-static">
+                                {{ form_label(form.nbreAgentsInvalidesDecision) }}
+                                {{ form_widget(form.nbreAgentsInvalidesDecision) }}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="input-group input-group-dynamic mt-4">
+                            {{ form_row(form.copie) }}
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="d-flex justify-content-start mt-4">
+                                <button type="submit" name="button" class="btn btn-sm bg-gradient-info me-2">Enregistrer</button>
+                                <a class="btn btn-sm bg-gradient-primary" href="{{ path('home') }}">Annuler</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-end mt-4">
+                                <a class="btn btn-sm bg-gradient-success" href="{{ path('app_decisions_index') }}">Liste des décisions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

@@ -29,7 +29,8 @@ class RegistrationController extends AbstractController
         // Si les données enregistrées à travers le formulaire soumis sont valides, on les save en BD .
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
+            $user->setEnableYN(true)
+                ->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('password')->getData()

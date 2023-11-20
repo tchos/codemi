@@ -7,6 +7,8 @@
 
     <table class="table">
         <tbody>
+            {% set ministere = decision.ministere %}
+            {% set year = decision.dateSignature | date('Y') %}
             <tr>
                 <th>Id</th>
                 <td>{{ decision.id }}</td>
@@ -16,8 +18,17 @@
                 <td>{{ decision.numeroDecision }}</td>
             </tr>
             <tr>
-                <th>DateSignature</th>
-                <td>{{ decision.dateSignature ? decision.dateSignature|date('Y-m-d') : '' }}</td>
+                <th>Copie</th>
+                <td>
+                    <a title="copie numérique de la decision {{ decision.numeroDecision }}"
+                       href="{% if decision.copie != "" %}
+                                                {{ asset("asset/copies/" ~ ministere ~ "/" ~ year ~ "/" ~ "/" ~ decision.copie ) }}
+                                                {% else %}
+                                                    {{ path('app_decisions_show', {'id': decision.id}) }}
+                                                {% endif %}">
+                        <img src="{{ asset("asset/img/logos/pdf_file_icon.png") }}" alt="{{ decision.copie }}" width="17px">
+                    </a>
+                </td>
             </tr>
             <tr>
                 <th>Signataire</th>

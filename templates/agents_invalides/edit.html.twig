@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AgentsInvalides{% endblock %}
+
+{% block body %}
+    <h1>Edit AgentsInvalides</h1>
+
+    {{ include('agents_invalides/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_agents_invalides_index') }}">back to list</a>
+
+    {{ include('agents_invalides/_delete_form.html.twig') }}
+{% endblock %}

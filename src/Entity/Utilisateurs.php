@@ -60,9 +60,13 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isPasswordModified = null;
 
+    #[ORM\OneToMany(mappedBy: 'userDecision', targetEntity: Decisions::class)]
+    private Collection $decisions;
+
     public function __construct()
     {
         $this->usersCrees = new ArrayCollection();
+        $this->decisions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -285,6 +289,36 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsPasswordModified(?bool $isPasswordModified): static
     {
         $this->isPasswordModified = $isPasswordModified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Decisions>
+     */
+    public function getDecisions(): Collection
+    {
+        return $this->decisions;
+    }
+
+    public function addDecision(Decisions $decision): static
+    {
+        if (!$this->decisions->contains($decision)) {
+            $this->decisions->add($decision);
+            $decision->setUserDecision($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDecision(Decisions $decision): static
+    {
+        if ($this->decisions->removeElement($decision)) {
+            // set the owning side to null (unless already changed)
+            if ($decision->getUserDecision() === $this) {
+                $decision->setUserDecision(null);
+            }
+        }
 
         return $this;
     }

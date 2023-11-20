@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('asset/img/apple-icon.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('asset/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('asset/img/logo_minfi.jpg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('asset/img/logos/logo_minfi.jpg') }}">
     {% block stylesheets %}{% endblock %}
     <title>CODEMI - {% block title %}{% endblock %}</title>
 
@@ -45,6 +45,7 @@
         {# Partie des stats #}
         {% include "partials/_dashboard.html.twig" %}
         {% block body %}{% endblock %}
+        {% include "partials/_toast.html.twig" %}
         {% include "partials/_footer.html.twig" %}
     </div>
 </main>
@@ -52,6 +53,7 @@
 {% include "partials/_settings.html.twig" %}
 
 <!--   Core JS Files   -->
+<script src="{{ asset('asset/js/toast.js') }}"></script>
 <script src="{{ asset('asset/js/core/popper.min.js') }}"></script>
 <script src="{{ asset('asset/js/core/bootstrap.min.js') }}"></script>
 <script src="{{ asset('asset/js/plugins/perfect-scrollbar.min.js') }}"></script>

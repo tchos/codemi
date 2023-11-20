@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AgentsInvalides index{% endblock %}
+
+{% block body %}
+    <h1>AgentsInvalides index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>MatriculeArmee</th>
+                <th>MatriculeSolde</th>
+                <th>Grade</th>
+                <th>TauxInvalidite</th>
+                <th>DateInvalidite</th>
+                <th>RangInstance</th>
+                <th>Revalorisation_y_n</th>
+                <th>TypeAgent</th>
+                <th>AuteurInvalide</th>
+                <th>DateDecesAuteur</th>
+                <th>TypeInvalidite</th>
+                <th>RangDecision</th>
+                <th>RangPage</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agents_invalide in agents_invalides %}
+            <tr>
+                <td>{{ agents_invalide.id }}</td>
+                <td>{{ agents_invalide.nom }}</td>
+                <td>{{ agents_invalide.matriculeArmee }}</td>
+                <td>{{ agents_invalide.matriculeSolde }}</td>
+                <td>{{ agents_invalide.grade }}</td>
+                <td>{{ agents_invalide.tauxInvalidite }}</td>
+                <td>{{ agents_invalide.dateInvalidite ? agents_invalide.dateInvalidite|date('Y-m-d') : '' }}</td>
+                <td>{{ agents_invalide.rangInstance }}</td>
+                <td>{{ agents_invalide.revalorisationYN ? 'Yes' : 'No' }}</td>
+                <td>{{ agents_invalide.typeAgent }}</td>
+                <td>{{ agents_invalide.auteurInvalide }}</td>
+                <td>{{ agents_invalide.dateDecesAuteur ? agents_invalide.dateDecesAuteur|date('Y-m-d') : '' }}</td>
+                <td>{{ agents_invalide.typeInvalidite }}</td>
+                <td>{{ agents_invalide.rangDecision }}</td>
+                <td>{{ agents_invalide.rangPage }}</td>
+                <td>
+                    <a href="{{ path('app_agents_invalides_show', {'id': agents_invalide.id}) }}">show</a>
+                    <a href="{{ path('app_agents_invalides_edit', {'id': agents_invalide.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_agents_invalides_new') }}">Create new</a>
+{% endblock %}
