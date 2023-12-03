@@ -6,6 +6,7 @@ use App\Entity\Decisions;
 use App\Entity\Historiques;
 use App\Form\DecisionsType;
 use App\Repository\DecisionsRepository;
+use App\Services\Statistiques;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,18 +19,20 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class DecisionsController extends AbstractController
 {
     #[Route('/', name: 'app_decisions_index', methods: ['GET'])]
-    public function index(DecisionsRepository $decisionsRepository): Response
+    public function index(DecisionsRepository $decisionsRepository, Statistiques $statistiques): Response
     {
         return $this->render('decisions/index.html.twig', [
             'decisions' => $decisionsRepository->findAll(),
+            'stats' => $statistiques->getStats(),
         ]);
     }
 
     #[Route('/new', name: 'app_decisions_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Statistiques $statistiques): Response
     {
         // On capte le user connecté
         $user = $this->getUser();
+        $stats = $statistiques->getStats();
 
         // Preparation de la table historique
         $historique = new Historiques();
@@ -97,19 +100,21 @@ class DecisionsController extends AbstractController
         return $this->render('decisions/new.html.twig', [
             'decision' => $decision,
             'form' => $form,
+            'stats' => $stats,
         ]);
     }
 
     #[Route('/{id}', name: 'app_decisions_show', methods: ['GET'])]
-    public function show(Decisions $decision): Response
+    public function show(Decisions $decision, Statistiques $statistiques): Response
     {
         return $this->render('decisions/show.html.twig', [
             'decision' => $decision,
+            'stats' => $statistiques->getStats(),
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_decisions_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Decisions $decision, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Decisions $decision, EntityManagerInterface $entityManager, Statistiques $statistiques): Response
     {
         $form = $this->createForm(DecisionsType::class, $decision);
         $form->handleRequest($request);
@@ -123,6 +128,7 @@ class DecisionsController extends AbstractController
         return $this->render('decisions/edit.html.twig', [
             'decision' => $decision,
             'form' => $form,
+            'stats' => $statistiques->getStats(),
         ]);
     }
 

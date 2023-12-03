@@ -40,10 +40,12 @@
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     {# Inclusion du navbar #}
-    {% include "partials/_hearder.html.twig" %}
+    {% include "partials/_header1.html.twig" %}
+    {% block breadcrumb %}{% endblock %}
+    {% include "partials/_header2.html.twig" %}
+
+
     <div class="container-fluid py-4">
-        {# Partie des stats #}
-        {% include "partials/_dashboard.html.twig" %}
         {% block body %}{% endblock %}
         {% include "partials/_toast.html.twig" %}
         {% include "partials/_footer.html.twig" %}

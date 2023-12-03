@@ -9,7 +9,7 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Décisions</p>
-                            <h4 class="mb-0">281</h4>
+                            <h4 class="mb-0">{{ stats.nbDecisions | number_format }}</h4>
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Agents invalides</p>
-                            <h4 class="mb-0">2,300</h4>
+                            <h4 class="mb-0">{{ stats.nbAgentsInvalides | number_format }}</h4>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize ">Utilisateurs</p>
-                            <h4 class="mb-0 ">+91</h4>
+                            <h4 class="mb-0 ">{{ stats.nbUsers | number_format }}</h4>
                         </div>
                     </div>
                 </div>

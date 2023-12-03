@@ -2,7 +2,12 @@
 
 {% block title %}New Decisions{% endblock %}
 
+{% block breadcrumb %}New DM{% endblock %}
+
 {% block body %}
+    {# Partie des stats #}
+    {% include "partials/_dashboard.html.twig" with {'stats': stats} %}
+
     {{ form_start(form) }}
     <div class="row mt-6">
         <div class="col-lg-9 col-12 mx-auto position-relative">

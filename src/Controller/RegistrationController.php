@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
@@ -63,6 +64,7 @@ class RegistrationController extends AbstractController
     }
 
     // Modification du profil
+    #[IsGranted('ROLE_USER')]
     #[Route('/user/{id}/edit', name: 'user_edit')]
     public function edit(EntityManagerInterface $manager, Request $request, Utilisateurs $user): Response
     {

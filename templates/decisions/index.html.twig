@@ -2,7 +2,12 @@
 
 {% block title %}Decisions index{% endblock %}
 
+{% block breadcrumb %}Liste des DM{% endblock %}
+
 {% block body %}
+    {# Partie des stats #}
+    {% include "partials/_dashboard.html.twig" with {'stats': stats} %}
+
     <div class="container-fluid py-4">
         <a class="btn btn-sm btn-success mt-4" href="{{ path('app_decisions_new') }}">Enregistrer une nouvelle décision</a>
         <div class="row">

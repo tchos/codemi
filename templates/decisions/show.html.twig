@@ -2,56 +2,77 @@
 
 {% block title %}Decisions{% endblock %}
 
-{% block body %}
-    <h1>Decisions</h1>
+{% block breadcrumb %}Détails sur la DM{% endblock %}
 
-    <table class="table">
-        <tbody>
-            {% set ministere = decision.ministere %}
-            {% set year = decision.dateSignature | date('Y') %}
-            <tr>
-                <th>Id</th>
-                <td>{{ decision.id }}</td>
-            </tr>
-            <tr>
-                <th>NumeroDecision</th>
-                <td>{{ decision.numeroDecision }}</td>
-            </tr>
-            <tr>
-                <th>Copie</th>
-                <td>
-                    <a title="copie numérique de la decision {{ decision.numeroDecision }}"
-                       href="{% if decision.copie != "" %}
+{% block body %}
+    {# Partie des stats #}
+    {% include "partials/_dashboard.html.twig" with {'stats': stats} %}
+
+    <div class="row mt-6">
+        <div class="col-lg-9 col-12 mx-auto position-relative">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div class="icon icon-lg icon-shape bg-gradient-info shadow text-center border-radius-xl mt-n4 me-3 float-start">
+                        <i class="material-icons opacity-10">splitscreen</i>
+                    </div>
+                    <h6 class="mb-0 text-primary">Détails sur la décisions ministérielle d'invalidité N° {{ decision.numeroDecision }}</h6>
+                </div>
+                <div class="card-body pt-2">
+                    <table class="table mb-6">
+                        <tbody>
+                        {% set ministere = decision.ministere %}
+                        {% set year = decision.dateSignature | date('Y') %}
+
+                        <tr>
+                            <th>Numéro de la décision: </th>
+                            <td>{{ decision.numeroDecision }}</td>
+                        </tr>
+                        <tr>
+                            <th>Copie numérique: </th>
+                            <td>
+                                <a title="copie numérique de la decision {{ decision.numeroDecision }}"
+                                   href="{% if decision.copie != "" %}
                                                 {{ asset("asset/copies/" ~ ministere ~ "/" ~ year ~ "/" ~ "/" ~ decision.copie ) }}
                                                 {% else %}
                                                     {{ path('app_decisions_show', {'id': decision.id}) }}
                                                 {% endif %}">
-                        <img src="{{ asset("asset/img/logos/pdf_file_icon.png") }}" alt="{{ decision.copie }}" width="17px">
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <th>Signataire</th>
-                <td>{{ decision.signataire }}</td>
-            </tr>
-            <tr>
-                <th>Ministere</th>
-                <td>{{ decision.ministere }}</td>
-            </tr>
-            <tr>
-                <th>NbrePages</th>
-                <td>{{ decision.nbrePages }}</td>
-            </tr>
-            <tr>
-                <th>NbreAgentsInvalidesDecision</th>
-                <td>{{ decision.nbreAgentsInvalidesDecision }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_decisions_index') }}">back to list</a>
-
-    <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}">edit</a>
-
-    {{ include('decisions/_delete_form.html.twig') }}
+                                    <img src="{{ asset("asset/img/logos/pdf_file_icon.png") }}" alt="{{ decision.copie }}" width="17px">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signataire: </th>
+                            <td>{{ decision.signataire }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ministere: </th>
+                            <td>{{ decision.ministere }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre de pages: </th>
+                            <td>{{ decision.nbrePages }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre d'agent invalide: </th>
+                            <td>{{ decision.nbreAgentsInvalidesDecision }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="d-flex justify-content-start mt-4">
+                                <a href="{{ path('app_decisions_index') }}" class="btn btn-sm bg-gradient-success me-1">Revenir à liste des DM</a>
+                                <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="btn btn-sm bg-gradient-dark">Modifier cette DM</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-end mt-4">
+                                <div class="col-4 ms-auto"><span class="col-3">{{ include('decisions/_delete_form.html.twig') }}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -2,7 +2,12 @@
 
 {% block title %}Edit Decisions{% endblock %}
 
+{% block breadcrumb %}Edition de la DM{% endblock %}
+
 {% block body %}
+    {# Partie des stats #}
+    {% include "partials/_dashboard.html.twig" with {'stats': stats} %}
+
     <h1>Edit Decisions</h1>
 
     {{ include('decisions/_form.html.twig', {'button_label': 'Update'}) }}

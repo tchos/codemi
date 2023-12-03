@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Historiques;
 use App\Form\UpdatePasswordType;
+use App\Services\Statistiques;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +41,7 @@ class SecurityController extends AbstractController
     //Mise à jour du mot de passe
     #[Route('/changepassword', name: 'password_edit')]
     public function changePassword(UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $manager,
-                                   Request $request): Response
+                                   Request $request, Statistiques $statistiques): Response
     {
         $user = $this->getUser();
         $history = new Historiques();
@@ -86,6 +87,7 @@ class SecurityController extends AbstractController
         return $this->render('security/change_pwd.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
+            'stats' => $statistiques->getStats(),
         ]);
     }
 }
