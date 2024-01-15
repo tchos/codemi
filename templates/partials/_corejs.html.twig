@@ -1,11 +1,14 @@
 <!--   Core JS Files   -->
-<script src="../../../asset/js/core/popper.min.js"></script>
-<script src="../../../asset/js/core/bootstrap.min.js"></script>
-<script src="../../../asset/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../../../asset/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="{{ asset('asset/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('asset/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('asset/js/core/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/amcharts/animated.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/amcharts/core.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/smooth-scrollbar.min.js') }}"></script>
+
 <!-- Kanban scripts -->
-<script src="../../../asset/js/plugins/dragula/dragula.min.js"></script>
-<script src="../../../asset/js/plugins/jkanban/jkanban.js"></script>
+<script src="{{ asset('asset/js/plugins/dragula/dragula.min.js') }}"></script>
+<script src="{{ asset('asset/js/plugins/jkanban/jkanban.js') }}"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -16,6 +19,6 @@
     }
 </script>
 <!-- Github buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script async defer src="{{ asset('asset/js/buttons.js') }}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../../../asset/js/material-dashboard.min.js?v=3.0.6"></script>
+<script async defer src="{{ asset('asset/js/material-dashboard.js') }}"></script>

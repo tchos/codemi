@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Historiques;
 use App\Entity\Utilisateurs;
 use App\Form\RegistrationFormType;
+use App\Repository\UtilisateursRepository;
 use App\Security\UserAuthenticator;
+use App\Services\Statistiques;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +19,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator,
                              UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
@@ -60,6 +63,22 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/inscription.html.twig', [
             'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Liste des utilisateurs
+     * @param Statistiques $statistiques
+     * @param UtilisateursRepository $repository
+     * @return Response
+     */
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/user/list', name: 'app_user_list')]
+    public function show(UtilisateursRepository $repository, Statistiques $statistiques): Response
+    {
+        return $this->render('registration/user_list.html.twig', [
+            'users' => $repository->findAll(),
+            'stats' => $statistiques->getStats(),
         ]);
     }
 

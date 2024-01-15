@@ -64,6 +64,9 @@ class Decisions
     #[ORM\ManyToOne(inversedBy: 'decisions')]
     private ?Utilisateurs $userDecision = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $is_deleted = false;
+
     public function __construct()
     {
         $this->pages = new ArrayCollection();
@@ -196,6 +199,18 @@ class Decisions
     public function setUserDecision(?Utilisateurs $userDecision): static
     {
         $this->userDecision = $userDecision;
+
+        return $this;
+    }
+
+    public function isIsDeleted(): ?bool
+    {
+        return $this->is_deleted;
+    }
+
+    public function setIsDeleted(?bool $is_deleted): static
+    {
+        $this->is_deleted = $is_deleted;
 
         return $this;
     }

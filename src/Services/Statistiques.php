@@ -41,7 +41,7 @@ class Statistiques
      */
     public function getDecisionsCount()
     {
-        return $this->manager->createQuery('SELECT COUNT(d) FROM App\Entity\Decisions d')
+        return $this->manager->createQuery('SELECT COUNT(d) FROM App\Entity\Decisions d WHERE d.is_deleted != true')
             ->getSingleScalarResult();
     }
 

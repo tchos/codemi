@@ -22,7 +22,7 @@ class DecisionsController extends AbstractController
     public function index(DecisionsRepository $decisionsRepository, Statistiques $statistiques): Response
     {
         return $this->render('decisions/index.html.twig', [
-            'decisions' => $decisionsRepository->findAll(),
+            'decisions' => $decisionsRepository->findBy(['is_deleted' => false]),
             'stats' => $statistiques->getStats(),
         ]);
     }
@@ -74,7 +74,9 @@ class DecisionsController extends AbstractController
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $decision->setCopie($newFilename)
-                        ->setUserDecision($user);
+                        ->setUserDecision($user)
+                        ->setIsDeleted(false)
+                ;
 
                 $historique->setTypeAction("CREATE")
                     ->setAuteur($user->getUsername())
@@ -136,7 +138,8 @@ class DecisionsController extends AbstractController
     public function delete(Request $request, Decisions $decision, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$decision->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($decision);
+            //$entityManager->remove($decision);
+            $decision->setIsDeleted(true);
             $entityManager->flush();
         }
 
