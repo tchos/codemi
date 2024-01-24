@@ -62,14 +62,18 @@
                         <div class="col">
                             <div class="d-flex justify-content-start mt-4">
                                 <a href="{{ path('app_decisions_index') }}" class="btn btn-sm bg-gradient-success me-1">Revenir à liste des DM</a>
-                                <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="btn btn-sm bg-gradient-dark">Modifier cette DM</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="btn btn-sm bg-gradient-dark">Modifier cette DM</a>
+                                {% endif %}
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="d-flex justify-content-end mt-4">
-                                <div class="col-4 ms-auto"><span class="col-3">{{ include('decisions/_delete_form.html.twig') }}</span></div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <div class="col">
+                                <div class="d-flex justify-content-end mt-4">
+                                    <div class="col-4 ms-auto"><span class="col-3">{{ include('decisions/_delete_form.html.twig') }}</span></div>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

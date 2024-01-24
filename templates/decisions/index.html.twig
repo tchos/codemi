@@ -60,12 +60,14 @@
                                         <a href="{{ path('app_decisions_show', {'id': decision.id}) }}" class="me-2 text-info">
                                             <span class="material-symbols-outlined">preview</span>
                                         </a>
-                                        <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="me-2 text-warning">
-                                            <span class="material-symbols-outlined">draw</span>
-                                        </a>
-                                        <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="me-2 text-danger">
-                                            <span class="material-symbols-outlined">delete_forever</span>
-                                        </a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="me-2 text-warning">
+                                                <span class="material-symbols-outlined">draw</span>
+                                            </a>
+                                            <a href="{{ path('app_decisions_edit', {'id': decision.id}) }}" class="me-2 text-danger">
+                                                <span class="material-symbols-outlined">delete_forever</span>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {% set i = i + 1 %}
