@@ -102,8 +102,8 @@ class DecisionsType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '10m',
-                        'maxSizeMessage' => 'La taille maximale dépasse 10 Mo',
+                        'maxSize' => '128m',
+                        'maxSizeMessage' => 'La taille maximale dépasse 128 Mo',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',

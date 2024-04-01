@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230919180911 extends AbstractMigration
+final class Version20240330131752 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,13 @@ final class Version20230919180911 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE utilisateurs ADD created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL');
-        $this->addSql('COMMENT ON COLUMN utilisateurs.created_at IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('ALTER TABLE decisions ALTER is_deleted DROP DEFAULT');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE utilisateurs DROP created_at');
+        $this->addSql('ALTER TABLE decisions ALTER is_deleted SET DEFAULT false');
     }
 }

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}STATS SAISIE DM PAR USER{% endblock %}
+{% block breadcrumb %}Stat saisies des DM{% endblock %}
+
+{% block body %}
+    {# Partie des stats #}
+    {% include "partials/_dashboard.html.twig" with {'stats': stats} %}
+
+    <div class="container-fluid py-4">
+        <a class="btn btn-sm btn-success mt-4" href="{{ path('app_decisions_index') }}">Voir la liste des décisions ministérielles</a>
+        <a class="btn btn-sm btn-info mt-4 float-end" href="{{ path('app_decisions_index') }}">Enregistrer une nouvelle décision ministérielle</a>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header">
+                        <h5 class="mb-0">Statistiques des saisies des décisions ministérielles d'invalidité</h5>
+                        <p class="text-sm mb-0">
+                            Effectif des décisions ministérielles d'invalidité saisies par utilisateur par ordre de mérite.
+                        </p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-flush" id="datatable-search">
+                            <thead class="thead-light bg-gradient-dark">
+                            <tr>
+                                <th class="text-white">RANG</th>
+                                <th class="text-white">NOM COMPLET</th>
+                                <th class="text-white">STRUCTURE</th>
+                                <th class="text-white text-end">EFFECTIF DM SAISIE</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% set rang = 1 %}
+                            {% for utilisateur in userStats %}
+                                <tr>
+                                    <td class="text-sm font-weight-normal">{{ rang }}</td>
+                                    <td class="text-sm font-weight-normal text-start">{{ utilisateur.fullname }}</td>
+                                    <td class="text-sm font-weight-normal ps-5">{{ utilisateur.service }}</td>
+                                    <td class="text-sm font-weight-normal text-end">{{ utilisateur.compteur }}</td>
+                                </tr>
+                                {% set rang = rang + 1 %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="8">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <!--   Core JS Files   -->
+    <script src="{{ asset('asset/js/plugins/datatables.js') }}"></script>
+    <script>
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: true
+        });
+    </script>
+
+{% endblock %}

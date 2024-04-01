@@ -48,15 +48,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_decisions_new') }}" target="_blank">
                     {# <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">receipt_long</i> #}
-                    <i class="material-icons-round ms-2">receipt_long</i>
                     <span class="nav-link-text ms-2 ps-1">Enregistrer</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_decisions_index') }}" target="_blank">
+                <a class="nav-link" href="{{ path('app_decisions_index') }}">
                     {# <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">receipt_long</i> #}
-                    <i class="material-icons-round ms-2">receipt_long</i>
                     <span class="nav-link-text ms-2 ps-1">Lister</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_statistiques') }}">
+                    <span class="nav-link-text ms-2 ps-1">Stats Users</span>
                 </a>
             </li>
             <hr class="horizontal light mt-4">

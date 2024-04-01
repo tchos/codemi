@@ -35,7 +35,7 @@ class Statistiques
     }
 
     /**
-     * Retourne le nombre d'organismes parapublics
+     * Retourne le nombre de décisions
      *
      * @return Integer
      */
@@ -55,4 +55,21 @@ class Statistiques
         return $this->manager->createQuery('SELECT SUM(d.nbreAgentsInvalidesDecision) FROM App\Entity\Decisions d')
             ->getSingleScalarResult();
     }
+
+    /**
+     * Retourne les statistiques de saisies par agents de saisie
+     * @return User
+     */
+    public function getUserStats($direction)
+    {
+        return $this->manager->createQuery(
+            'SELECT u.fullname as fullname, u.service as service, COUNT(d.numeroDecision) as compteur
+            FROM App\Entity\Utilisateurs u
+            JOIN u.decisions d
+            GROUP BY fullname, service
+            ORDER BY compteur '.$direction
+        )
+            ->getResult();
+    }
+
 }

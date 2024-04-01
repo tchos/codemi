@@ -55,7 +55,7 @@ class Utilisateurs implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $usersCrees;
 
     #[ORM\Column]
-    private ?bool $enable_y_n = null;
+    private ?bool $enable_y_n = true;
 
     #[ORM\Column(nullable: true)]
     private ?bool $isPasswordModified = null;

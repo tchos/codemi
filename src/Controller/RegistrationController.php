@@ -77,9 +77,34 @@ class RegistrationController extends AbstractController
     public function show(UtilisateursRepository $repository, Statistiques $statistiques): Response
     {
         return $this->render('registration/user_list.html.twig', [
-            'users' => $repository->findAll(),
+            'utilisateurs' => $repository->findBy(['enable_y_n' => true]),
             'stats' => $statistiques->getStats(),
         ]);
+    }
+
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/user/delete/{id}', name: 'user_delete')]
+    public function delete(EntityManagerInterface $manager, Request $request, Utilisateurs $user): Response
+    {
+        // pour l'historique de l'action
+        $history = new Historiques();
+        $user->setEnableYN(false);
+
+        $history->setTypeAction("DELETE")
+            ->setAuteur($this->getUser()->getUsername())
+            ->setNature("COMPTE_USER")
+            ->setClef($form->get('username')->getData())
+            ->setDateAction(new \DateTimeImmutable())
+        ;
+        // Persistence de l'entité Organismes
+        $manager->persist($user);
+        $manager->persist($history);
+        $manager->flush();
+
+        // Alerte succès de la mise à jour des informations sur un organisme
+        $this->addFlash("danger", "Utilisateur supprimé avec succès !");
+
+        return $this->redirectToRoute('user_list');
     }
 
     // Modification du profil
@@ -123,5 +148,38 @@ class RegistrationController extends AbstractController
             'form' => $form->createView(),
             'user' => $user
         ]);
+    }
+
+    // Réinitialisation du mot de passe utilisteur
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/user/{id}/resetpassword', name: 'user_resetpassword')]
+    public function resetPassword(EntityManagerInterface $entityManager, Request $request, Utilisateurs $utilisateur,
+                                  UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        // On capte le user connecté
+        $user = $this->getUser();
+        // pour l'historisation de l'action
+        $history = new Historiques();
+
+        $plainPassword = 'aaaaabbbbb';
+        $hashedPassword = $userPasswordHasher->hashPassword($utilisateur, $plainPassword);
+        $utilisateur->setPassword($hashedPassword);
+
+        $history->setTypeAction("RESET")
+            ->setAuteur($user->getUsername())
+            ->setNature("PASSWORD")
+            ->setClef($utilisateur->getUsername())
+            ->setDateAction(new \DateTimeImmutable())
+        ;
+
+        $entityManager->persist($utilisateur);
+        $entityManager->persist($history);
+        $entityManager->flush();
+
+        // Alerte succès de la mise à jour des informations sur un organisme
+        $this->addFlash("warning", "Le mot de passe a été réinitialisé avec succès !");
+
+        return $this->redirectToRoute('app_user_list');
+
     }
 }
